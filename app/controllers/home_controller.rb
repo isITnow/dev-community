@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   def index
-    @users = User.limit(16).order(:first_name)
+    @q = User.ransack(params[:q])
+    @users = @q.result.limit(16).order(:first_name)
   end
 end
