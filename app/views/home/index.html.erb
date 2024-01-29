@@ -1,1 +1,19 @@
-<h1>Welcome to the developers community!</h1>
+<div class="col-lg-10 mx-auto mt-5">
+  <ul class="list-unstyled row mt-4 mb-4">
+    <% @users.each do |user|%>
+      <li class="col-lg-3 mb-3 my-3">
+        <div class="card h-100 text-center shadow">
+          <div class="card-body">
+            <%= image_tag "dmu1.png", style: "width: 150px; border-radius: 50%; border: 2px solid: #0d6efd;", class: "mb-3" %>
+            <div class="user-info">
+              <h5><%= user.name%></h5>
+              <p class="lead"><%= user.profile_title%></p>
+              <small class="text-primary"><%= user.country%></small>
+              <%= link_to "View Profile", "javascript:void(0)", class: "btn btn-primary mt-3" %>
+            </div>
+          </div>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+</div>
