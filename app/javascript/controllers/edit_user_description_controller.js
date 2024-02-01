@@ -2,9 +2,7 @@ import { Controller } from "@hotwired/stimulus";
 
 // Connects to data-controller="edit-user-description"
 export default class extends Controller {
-  connect() {
-    console.log("Connected edit-user-description");
-  }
+  connect() {}
 
   initialize() {
     this.element.setAttribute(
@@ -16,7 +14,6 @@ export default class extends Controller {
   showModal(e) {
     e.preventDefault();
     this.url = this.element.getAttribute("href");
-    console.log(this.url);
     fetch(this.url, {
       headers: {
         Accept: "text/vnd.turbo-stream.html",
