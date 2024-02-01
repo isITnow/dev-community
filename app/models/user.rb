@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
           :recoverable, :rememberable, :validatable
 
+  has_many :work_experiences
+
   PROFILE_TITLE = [
     'Senior Ruby on Rails Developer',
     'Full Stack Ruby on Rails Developer',
@@ -12,7 +14,7 @@ class User < ApplicationRecord
     'Senior Javascript Developer',
     'Senior Frontend Developer',
     ].freeze
-
+    
   def name
     "#{first_name} #{last_name}".strip
   end
