@@ -16,8 +16,8 @@
         <div class="card h-100 text-center shadow">
           <div class="card-body">
             <%= image_tag "dmu1.png", style: "width: 150px; border-radius: 50%; border: 2px solid: #0d6efd;", class: "mb-3" %>
-            <div class="user-info">
-              <h5><%= user.name %></h5>
+            <div class="user-info" data-controller="user-name">
+              <h5 data-user-name-target="name" data-action="click->user-name#getUserName"><%= user.name %></h5>
               <p class="lead"><%= user.profile_title %></p>
               <p class="text-primary fs-6"><%= user.country %></p>
               <%= link_to "View Profile", member_path(user), class: "btn btn-primary mt-3" %>
