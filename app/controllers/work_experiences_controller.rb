@@ -9,7 +9,7 @@ class WorkExperiencesController < ApplicationController
   def edit; end
 
   def create
-    @work_experience = current_user.work_experiences.new(work_experience_params)
+    @work_experience = current_user.work_experiences.new work_experience_params
     respond_to do |format|
       if @work_experience.save
         format.turbo_stream do
@@ -27,7 +27,7 @@ class WorkExperiencesController < ApplicationController
 
   def update
     respond_to do |format|
-      if @work_experience.update(work_experience_params)
+      if @work_experience.update work_experience_params 
         format.turbo_stream do
           render turbo_stream: turbo_stream.replace("work_experience_item_#{@work_experience.id}",
           partial: 'work_experiences/work_experience', locals: { work_experience: @work_experience })
@@ -41,7 +41,12 @@ class WorkExperiencesController < ApplicationController
     end
   end
 
-  def destroy; end
+  def destroy
+    respond_to do |format|
+      @work_experience.destroy
+      format.turbo_stream { render turbo_stream: turbo_stream.remove("work_experience_item_#{@work_experience.id}") }
+    end
+  end
   
   private
 
