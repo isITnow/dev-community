@@ -7,7 +7,13 @@
         </p>
       </div>
     </div>
-    <div class="col-lg-3"></div>
+    <div class="col-lg-3">
+      <div class="d-flex justify-content-end">
+        <%= link_to edit_work_experience_path(work_experience), data: { controller: 'bs-modal-form' } do %>
+          <i class="bi bi-pencil-fill"></i>
+        <% end %>
+      </div>
+    </div>
   </div>
   <div class="d-flex flex-column">
     <p class="mb-0"><%= work_experience.company %></p>

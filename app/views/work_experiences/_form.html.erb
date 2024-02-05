@@ -36,7 +36,7 @@
             <span class="text-danger">*</span>
           </label>
           <%= form.select :employment_type,
-              options_for_select(WorkExperience::EMPLOYMENT_TYPE),
+              options_for_select(WorkExperience::EMPLOYMENT_TYPE, selected: form.object.employment_type),
               { prompt: 'Select employment type' },
               { class: 'form-select' } %>
         </div>
@@ -57,7 +57,7 @@
             <span class="text-danger">*</span>
           </label>
           <%= form.select :location_type,
-              options_for_select(WorkExperience::LOCATION_TYPE),
+              options_for_select(WorkExperience::LOCATION_TYPE, selected: form.object.location_type),
               { prompt: 'Select location type' },
               { class: 'form-select' } %>
         </div>
