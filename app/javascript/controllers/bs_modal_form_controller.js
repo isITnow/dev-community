@@ -8,16 +8,32 @@ export default class extends Controller {
     this.element.setAttribute("data-action", "click->bs-modal-form#showModal");
   }
 
-  showModal(e) {
+  // showModal(e) {
+  //   e.preventDefault();
+  //   this.url = this.element.getAttribute("href");
+  //   fetch(this.url, {
+  //     headers: {
+  //       Accept: "text/vnd.turbo-stream.html",
+  //     },
+  //   })
+  //     .then((resp) => resp.text())
+  //     .then((html) => Turbo.renderStreamMessage(html))
+  //     .catch((err) => console.error(err.message));
+  // }
+
+  async showModal(e) {
     e.preventDefault();
     this.url = this.element.getAttribute("href");
-    fetch(this.url, {
-      headers: {
-        Accept: "text/vnd.turbo-stream.html",
-      },
-    })
-      .then((resp) => resp.text())
-      .then((html) => Turbo.renderStreamMessage(html))
-      .catch((err) => console.error(err.message));
+    try {
+      const resp = await fetch(this.url, {
+        headers: {
+          Accept: "text/vnd.turbo-stream.html",
+        },
+      });
+      const html = await resp.text();
+      Turbo.renderStreamMessage(html);
+    } catch (err) {
+      console.error(err.message);
+    }
   }
 }
