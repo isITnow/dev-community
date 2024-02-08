@@ -6,4 +6,13 @@ module ApplicationHelper
   def is_same_user?(current_user, user)
     current_user == user
   end
+  def get_status_btn_class status
+    "btn mt-2 " + if status == "pending"
+                    "btn-primary"
+                  elsif status == "accepted"
+                    "btn-success"
+                  else
+                    "btn-danger"
+                  end
+  end
 end
