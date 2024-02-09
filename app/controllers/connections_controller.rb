@@ -2,8 +2,8 @@ class ConnectionsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @requested_connections = Connection.requested_connections current_user
-    @received_connections = Connection.received_connections current_user
+    @requested_connections = Connection.requested_connections current_user.id
+    @received_connections = Connection.received_connections current_user.id
   end
   
   def create
