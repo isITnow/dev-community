@@ -2,7 +2,10 @@ class MembersController < ApplicationController
   before_action :authenticate_user!, only: %i[edit_description update_description edit_personal_details update_personal_details]
   before_action :set_user!, only: %i[show]
 
-  def show; end
+  def show
+    @connections = Connection.where('user_id = ? OR connected_user_id = ?',
+                                    @user.id, @user.id).where(status: 'accepted')
+  end
 
   def edit_description; end
   
@@ -30,6 +33,14 @@ class MembersController < ApplicationController
         end
       end
     end
+  end
+
+  def connections
+    @requested_connections = Connection.requested_connections(params[:id])
+                                        .where(status: 'accepted')
+    @received_connections = Connection.received_connections(params[:id])
+                                        .where(status: 'accepted')
+    @total_connections = @requested_connections.count + @received_connections.count
   end
   
   private

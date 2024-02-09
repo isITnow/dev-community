@@ -44,6 +44,11 @@
             <% end %>
           <% end %>
         </div>
+        <div class="mt-3" id="connection-count">
+          <% if @connections.present? %>
+            <%= link_to pluralize(@connections.count, 'connection'), member_connections_path(user) %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
