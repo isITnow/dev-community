@@ -10,7 +10,8 @@
       <% end %>
     </div>
   </div>
-  <ul class="list-unstyled row mt-4 mb-4 g-4">
+  <%= paginate @users %>
+  <ul class="list-unstyled row mb-4 g-4">
     <% @users.each do |user| %>
       <li class="col-lg-3">
         <div class="card h-100 text-center shadow">
@@ -27,4 +28,5 @@
       </li>
     <% end %>
   </ul>
+  <%= paginate @users %>
 </div>
