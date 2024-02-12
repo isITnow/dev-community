@@ -13,7 +13,7 @@
               </h3>
             </div>
           </div>
-          <% if user_signed_in? && current_user == user %>
+          <% if user_signed_in? && is_same_user?(user) %>
             <div class="col-lg-2">
               <div class="d-flex justify-content-end">
                 <%= link_to edit_member_personal_details_path, data: { controller: 'bs-modal-form' } do %>
@@ -44,11 +44,16 @@
             <% end %>
           <% end %>
         </div>
-        <div class="mt-3" id="connection-count">
-          <% if @connections.present? %>
+        <% if @connections.present? %>
+          <div class="mt-3" id="connection-count">
             <%= link_to pluralize(@connections.count, 'connection'), member_connections_path(user) %>
-          <% end %>
-        </div>
+          </div>
+        <% end %>
+        <% if !is_same_user?(user) %>
+          <div class="mt-3" id="mutual-connection-count">
+            <%= link_to pluralize(@mutual_connections.count, 'mutual connection'), member_connections_path(user, mutual_connections: true) %>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
