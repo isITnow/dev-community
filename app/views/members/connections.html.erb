@@ -20,8 +20,12 @@
                         <%= user.name %>
                       </h4>
                     <% end %>
-                    <% mutual_connections_count = current_user.connected_user_ids.intersection(user.connected_user_ids).count %>
-                    <% if mutual_connections_count > 0 && !is_same_user?(user) %>
+                    <% if !is_same_user?(@user) %>
+                      <% mutual_connections_count = current_user.mutually_connected_ids(@user).count %>
+                    <% else %>
+                      <% mutual_connections_count = current_user.mutually_connected_ids(user).count %>
+                    <% end %>
+                    <% if mutual_connections_count > 0 %>
                       <%= link_to member_connections_path(user, mutual_connections: true), style: "
                       text-decoration: none;", target: "_blank" do %>
                         <small class="text-primary"><%= pluralize(mutual_connections_count, "mutual connections") %></small>
