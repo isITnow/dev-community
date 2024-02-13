@@ -11,28 +11,18 @@ class MembersController < ApplicationController
   def edit_description; end
   
   def update_description
-    respond_to do |format|
-      if current_user.update user_description_params
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.replace('member-description',
-                                            partial: 'members/member_description',
-                                            locals: { user: current_user })
-        end
-      end
+    if current_user.update user_description_params
+      render_turbo_stream('replace', 'member-description',
+                          'members/member_description', { user: current_user })
     end
   end
 
   def edit_personal_details; end
 
   def update_personal_details
-    respond_to do |format|
-      if current_user.update user_personal_details_params
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.replace('member-personal-details',
-                                            partial: 'members/member_personal_details',
-                                            locals: { user: current_user })
-        end
-      end
+    if current_user.update user_personal_details_params
+      render_turbo_stream('replace', 'member-personal-details',
+                          'members/member_personal_details', { user: current_user })
     end
   end
 
