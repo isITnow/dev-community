@@ -13,7 +13,7 @@
               </h3>
             </div>
           </div>
-          <% if user_signed_in? && is_same_user?(user) %>
+          <% if is_same_user?(user) %>
             <div class="col-lg-2">
               <div class="d-flex justify-content-end">
                 <%= link_to edit_member_personal_details_path, data: { controller: 'bs-modal-form' } do %>
@@ -28,19 +28,17 @@
         <p class="">e-mail: <span class="text-primary"><%= user.email%></span></p>
         <div class="" id="user-connection-status">
           <% unless is_same_user?(user) %>
-            <% if user_signed_in? %>
-              <% if current_user.check_if_already_connected? user %>
-                <%= link_to "Connect", connections_path, class: "btn btn-primary",
+            <% if current_user.check_if_already_connected? user %>
+              <%= link_to "Connect", connections_path, class: "btn btn-primary",
                 data: { controller: "connections", turbo_method: :post,
                 connections_target: "connection", requester_id: current_user.id,
                 connected_id: user.id } %>
-              <% elsif get_connection_status(user) == "pending" %>
-                <%= render "connections/create", connector: user %>
-              <% elsif get_connection_status(user) == "accepted" %>
-                <button type="button" class="btn btn-success">Connected</button>
-              <% elsif get_connection_status(user) == "rejected" %>
-                <button type="button" class="btn btn-danger">Rejected</button>
-              <% end %>
+            <% elsif get_connection_status(user) == "pending" %>
+              <%= render "connections/create", connector: user %>
+            <% elsif get_connection_status(user) == "accepted" %>
+              <button type="button" class="btn btn-success">Connected</button>
+            <% elsif get_connection_status(user) == "rejected" %>
+              <button type="button" class="btn btn-danger">Rejected</button>
             <% end %>
           <% end %>
         </div>

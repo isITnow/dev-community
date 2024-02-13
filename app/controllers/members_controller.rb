@@ -1,5 +1,4 @@
 class MembersController < ApplicationController
-  before_action :authenticate_user!, only: %i[edit_description update_description edit_personal_details update_personal_details]
   before_action :set_user!, only: %i[show connections]
 
   def show
