@@ -3,7 +3,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :omniauthable
   devise :database_authenticatable, :registerable,
           :recoverable, :rememberable, :validatable,
-          :trackable, :confirmable
+          :trackable, :confirmable,
+          authentication_keys: [:login]
 
   has_many :work_experiences, dependent: :destroy
   has_many :connections, dependent: :destroy
@@ -21,6 +22,22 @@ class User < ApplicationRecord
     'Senior Javascript Developer',
     'Senior Frontend Developer',
     ].freeze
+
+  attr_writer :login
+
+  def login
+    @login || username || email
+  end
+
+  def self.find_for_database_authentication(warden_conditions)
+    conditions = warden_conditions.dup
+    if login = conditions.delete(:login)
+      where(conditions.to_h).where(["lower(username) = :value OR lower(email) = :value",
+                                    { value: login.downcase }]).first
+    elsif conditions.has_key?(:username) || conditions.has_key?(:email)
+      where(conditions.to_h).first
+    end
+  end
     
   def name
     "#{first_name} #{last_name}".strip

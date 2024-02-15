@@ -7,8 +7,8 @@
       <%= form_for(resource, as: resource_name, url: session_path(resource_name),
                     html: { data: {turbo: false} }) do |f| %>
         <div class="form-group">
-          <%= f.label :email, class: "mb-2" %>
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+          <%= f.label :email_or_username, class: "mb-2" %>
+          <%= f.text_field :login, class: "form-control" %>
         </div>
         <div class="form-group mt-3">
           <%= f.label :password, class: "mb-2" %>
