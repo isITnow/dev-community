@@ -117,5 +117,29 @@ RSpec.feature "UserSearches", type: :feature do
         expect(page).to_not have_text(@user4.country)  
       end
     end
+
+    describe "view user profile" do
+      it "should search user and visit his profile" do
+        fill_in 'q_city_or_country_cont', with: 'Ukraine'
+        click_button 'Search'
+
+        expect(page).to have_text(@user1.name) 
+        expect(page).to have_text(@user1.profile_title) 
+        expect(page).to have_text(@user1.country) 
+
+        expect(page).to_not have_text(@user2.country)  
+        expect(page).to_not have_text(@user3.country)  
+        expect(page).to_not have_text(@user4.country)
+
+        click_link 'View Profile'
+        expect(page).to have_current_path("/member/#{@user1.id}")
+        expect(page).to have_text(@user1.name) 
+        expect(page).to have_text(@user1.profile_title) 
+        expect(page).to have_text(@user1.address)
+        expect(page).to have_text("e-mail: #{@user1.email}")
+        expect(page).to have_text('About')
+        expect(page).to have_text(@user1.about)
+      end
+    end
   end
 end
