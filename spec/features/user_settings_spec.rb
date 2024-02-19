@@ -28,6 +28,7 @@ RSpec.feature "UserSettings", type: :feature do
       fill_in 'user_pincode',	with: '11004-05' 
       fill_in 'user_profile_title',	with: 'Ninja Turtles Squad Leader'
       click_button 'Save Changes'
+      sleep 2
 
       expect(page).to have_current_path("/member/#{@user.id}")
       expect(page).to have_text('Leonardo The Turtle') 
@@ -46,11 +47,11 @@ RSpec.feature "UserSettings", type: :feature do
 
       fill_in 'user_about',	with: 'On branch main Your branch is ahead of "origin/main" by 3 commits. (use "git push" to publish your local commits)'
       click_button 'Save Changes'
+      sleep 2
 
       expect(page).to have_current_path("/member/#{@user.id}")
-      expect(page).to have_text('Edit your description') 
+      expect(page).to have_text('About') 
       expect(page).to have_text('On branch main Your branch is ahead of "origin/main" by 3 commits. (use "git push" to publish your local commits)')
     end
-    
   end
 end

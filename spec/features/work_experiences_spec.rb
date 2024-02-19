@@ -42,7 +42,8 @@ RSpec.feature "WorkExperiences", type: :feature do
         fill_in "work_experience_start_date",	with: '01/01/2018' 
         fill_in "work_experience_end_date",	with: '01/03/2020' 
         fill_in "work_experience_description",	with: "I worked here for two years as a full stack Ruby on Rails developer"
-
+        sleep 2
+        
         click_button('Save Changes')
         visit("/member/#{@user.id}")
         expect(page).to have_text('Senior RoR developer')
