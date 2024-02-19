@@ -10,7 +10,6 @@ RSpec.feature "UserSearches", type: :feature do
       @user2 = create(:user, country: 'Australia', city: 'Sydney')
       @user3 = create(:user, country: 'England', city: 'London')
       @user4 = create(:user, country: 'USA', city: 'New York')
-      sleep 1
       visit root_path
     end
 
